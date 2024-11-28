@@ -12,6 +12,7 @@ import TaskList from "@/components/TaskList";
 import SearchBar from "@/components/SearchBar";
 import Button from "@/components/Button";
 import Filter from "@/components/Filter";
+import BackIcon from "@/components/BackIcon";
 
 export default function List(): React.ReactElement {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -92,7 +93,7 @@ export default function List(): React.ReactElement {
 
   if (!filteredData && isError) {
     content = (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center w-full">
         <h2 className="font-bold text-2xl">No data found.</h2>
       </div>
     );
@@ -110,6 +111,7 @@ export default function List(): React.ReactElement {
 
   return (
     <div className="flex flex-col space-y-10">
+      <BackIcon link="/" />
       <div className="flex justify-between items-center">
         <SearchBar onSearch={handleSearch} />
         <Button label="Add item to List" onClick={() => setIsOpen(true)} />

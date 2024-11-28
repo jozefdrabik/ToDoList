@@ -13,8 +13,8 @@ export default function Filter({
     <div className="w-full md:w-40 md:mt-4">
       <RadioGroup
         value={selected}
-        onChange={setSelected as (value: string) => void}
-        className="md:space-y-6 flex flex-row md:flex-col "
+        onChange={setSelected}
+        className="space-x-4 md:space-x-0 md:space-y-6 flex flex-row md:flex-col "
       >
         {filterData.map((item) => (
           <Radio

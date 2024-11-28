@@ -9,6 +9,7 @@ import Modal from "@/components/Modal";
 import ErrorBlock from "@/components/ErrorBlock";
 import { ISlugID, ISlugIDSignal } from "@/types/http";
 import Button from "@/components/Button";
+import BackIcon from "@/components/BackIcon";
 
 export default function Item(): React.ReactElement {
   const params = useParams();
@@ -31,9 +32,8 @@ export default function Item(): React.ReactElement {
   } = useMutation({
     mutationFn: deleteItem,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["items", [id, slug]],
-        refetchType: "none",
+      queryClient.removeQueries({
+        queryKey: ["items"],
       });
       router.push(`/list/${slug}`);
     },
@@ -64,10 +64,6 @@ export default function Item(): React.ReactElement {
         message="Please try again later."
       />
     );
-  }
-
-  if (!data) {
-    content = "aa";
   }
 
   if (data) {
@@ -112,7 +108,8 @@ export default function Item(): React.ReactElement {
           )}
         </Modal>
       )}
-      <div className="flex justify-center">{content}</div>
+      <BackIcon link="./" />
+      <div className="flex justify-center mt-5">{content}</div>
     </>
   );
 }

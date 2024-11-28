@@ -20,13 +20,11 @@ export interface IData<T> {
   itemData: T;
 }
 
-export interface IDataSlug<T> {
+export interface IDataSlug<T> extends IData<T> {
   slug: string;
-  itemData: T;
 }
 
-export interface IDataIDSlug<T> {
+export interface IDataIDSlug<T> extends IData<T> {
   slug: string;
   id: string;
-  itemData: T;
 }

@@ -37,14 +37,14 @@ export default function AddListForm({ isOpen, close }: IForms) {
     <Modal close={close} isOpen={isOpen}>
       {isError && (
         <ErrorBlock
-          title="Nepodarilo sa vyvroriť nový item"
-          message="Nepodarilo sa vytvoriť item. Skontrolujte si svoje zadané údaje a skúste to znova"
+          title="Couldn`t create new list"
+          message="Couldn`t create new list. Check your input values and try again."
         />
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <Input
           id="title"
-          label="Názov"
+          label="Title"
           error={errors.title?.message}
           {...register("title")}
         />

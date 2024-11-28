@@ -45,20 +45,20 @@ export default function AddItemForm({ isOpen, close }: IForms) {
     <Modal close={close} isOpen={isOpen}>
       {isError && (
         <ErrorBlock
-          title="Nepodarilo sa vyvroriť nový item"
-          message="Nepodarilo sa vytvoriť item. Skontrolujte si svoje zadané údaje a skúste to znova"
+          title="Couldnt`t create new item"
+          message="Couldnt`t create new item. Check your input values and try again later."
         />
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <Input
           id="titleAddItem"
-          label="Názov"
+          label="Title"
           error={errors.title?.message}
           {...register("title")}
         />
         <Input
           id="descriptionAddItem"
-          label="Popisok"
+          label="Description"
           textArea
           error={errors.description?.message}
           {...register("description")}
