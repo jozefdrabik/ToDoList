@@ -17,6 +17,7 @@ import BackIcon from "@/components/BackIcon";
 export default function List(): React.ReactElement {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [filteredData, setFilteredData] = React.useState<IItem[] | null>(null);
+  const [displayedData, setDisplayedData] = React.useState<IItem[]>([]);
   const [selected, setSelected] = React.useState("All");
   const params = useParams();
 
@@ -60,8 +61,8 @@ export default function List(): React.ReactElement {
   };
 
   const handleSearch = (query: string): void => {
-    if (!data) return;
-    const filtered = data.filter(
+    if (!displayedData) return;
+    const filtered = displayedData.filter(
       (item: IItem) =>
         item.title.toLowerCase().includes(query.toLowerCase()) ||
         item.description.toLowerCase().includes(query.toLowerCase()),
@@ -71,18 +72,22 @@ export default function List(): React.ReactElement {
 
   React.useEffect(() => {
     if (!data) return;
+
+    let filtered: IItem[];
+
     if (selected === "Finished") {
-      const filtered = data.filter((item: IItem) => item.finished);
-      setFilteredData(filtered);
+      filtered = data.filter((item: IItem) => item.finished);
     } else if (selected === "Active") {
-      const filtered = data.filter(
+      filtered = data.filter(
         (item: IItem) =>
           new Date(item.deadline) >= new Date() && !item.finished,
       );
-      setFilteredData(filtered);
     } else {
-      setFilteredData(data);
+      filtered = data;
     }
+
+    setDisplayedData(filtered);
+    setFilteredData(filtered);
   }, [data, selected]);
 
   let content;
